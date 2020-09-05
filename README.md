@@ -1,9 +1,9 @@
 # mercadolibre-technical-test
 
-## Descripcion
+## Descripción
 El microservicio fue desarrollado en **Java 8** con **Spring Boot 2** y trabaja con una base de datos **H2** con la ORM de **Spring Boot JPA**, por ultimo, este fue desplegado en una instancia de la capa gratuita de **Amazon AWS**
 
-## Prerequisitos
+## Prerrequisitos
 * Java 1.8.0_265
 * Docker (opcional)
 
@@ -24,7 +24,7 @@ El microservicio fue desarrollado en **Java 8** con **Spring Boot 2** y trabaja 
         "item_ids": ["MLA2", "MLA4", "MLA5", "MLA1"]
     }
     ```
-## Instricciones de puesta en marcha
+## Instrucciones de puesta en marcha
 1. Clonar el proyecto y ubicar se en la raiz de este
 2. Compilar el proyecto
     **$ ./gradlew clean build docker** (si no se tienen **docker** instalada quitar lo del comando)
