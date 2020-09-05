@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mercadolibre.database.entity.ItemEntity;
 import com.mercadolibre.database.repository.ItemRepository;
 import com.mercadolibre.exception.CanNotBuyNothingException;
@@ -37,8 +36,7 @@ public class CouponServiceImplement implements CouponService {
     private ItemRepository itemRepository;
 
     @Override
-    public CouponResponse coupon(CouponRequest request)
-            throws JsonMappingException, JsonProcessingException {
+    public CouponResponse coupon(CouponRequest request) {
         float amount = request.getAmount();
         List<String> itemIds = request.getItemIds();
         Map<String, Float> items = new HashMap<>();
@@ -52,12 +50,16 @@ public class CouponServiceImplement implements CouponService {
         }
 
         for (String itemId : itemIds) {
-            MercadolibreGetItemByIdResponse item = mercadolibreClient.getItemById(itemId);
+            try {
+                MercadolibreGetItemByIdResponse item = mercadolibreClient.getItemById(itemId);
 
-            Float itemPrice = item.getPrice();
+                Float itemPrice = item.getPrice();
 
-            if (itemPrice != null && itemPrice > 0)
-                items.put(itemId, item.getPrice());
+                if (itemPrice != null && itemPrice > 0)
+                    items.put(itemId, item.getPrice());
+            } catch (JsonProcessingException e) {
+                logger.error("ERROR ->", e);
+            }
         }
 
         List<String> itemIdsResult = this.calculate(items, amount);

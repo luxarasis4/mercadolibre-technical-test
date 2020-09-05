@@ -13,8 +13,18 @@ import javax.persistence.Table;
         name = "item")
 public class ItemEntity implements Serializable {
     private static final long serialVersionUID = 2110349641920840787L;
+    
+    public ItemEntity() {
+		super();
+	}
 
-    @Id
+	public ItemEntity(String id, Float price) {
+		super();
+		this.id = id;
+		this.price = price;
+	}
+
+	@Id
     @Column(
             name = "id")
     private String id;
@@ -37,4 +47,9 @@ public class ItemEntity implements Serializable {
     public void setPrice(Float price) {
         this.price = price;
     }
+
+	@Override
+	public String toString() {
+		return "ItemEntity [id=" + id + ", price=" + price + "]";
+	}
 }

@@ -17,6 +17,16 @@ public class CouponRequest {
     @NotNull
     private Float amount;
 
+    public CouponRequest() {
+        super();
+    }
+
+    public CouponRequest(@NotNull @NotEmpty List<String> itemIds, @NotNull Float amount) {
+        super();
+        this.itemIds = itemIds;
+        this.amount = amount;
+    }
+
     public List<String> getItemIds() {
         return itemIds;
     }
